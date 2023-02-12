@@ -3,18 +3,18 @@ import Head from './components/Head';
 import Body from './components/Body';
 
 const Main = () => {
-  let DATE = new Date();
-  const YEAR = DATE.getFullYear();
-  const MONTH = DATE.getMonth() + 1;
-
+  const TODAY = new Date();
+  const YEAR = TODAY.getFullYear();
+  const MONTH = TODAY.getMonth() + 1;
+  const DATE = TODAY.getDate();
   const [month, setMonth] = useState(MONTH);
   const [year, setYear] = useState(YEAR);
   const [totalDate, setTotalDate] = useState([]);
 
   const changeDate = (month) => {
     //이전 날짜
-    let PVLastDate = new Date(YEAR, month - 1, 0).getDate();
-    let PVLastDay = new Date(YEAR, month - 1, 0).getDay();
+    const PVLastDate = new Date(YEAR, month - 1, 0).getDate();
+    const PVLastDay = new Date(YEAR, month - 1, 0).getDay();
     //다음 날짜
     const ThisLasyDay = new Date(YEAR, month, 0).getDay();
     const ThisLasyDate = new Date(YEAR, month, 0).getDate();
@@ -22,13 +22,13 @@ const Main = () => {
     //이전 날짜 만들기
     let PVLD = [];
     if (PVLastDay !== 6) {
-      for (let i = 0; i < PVLastDay + 1; i++) {
+      for (let i = 0; i < PVLastDay + 1; ++i) {
         PVLD.unshift(PVLastDate - i);
       }
     }
     //다음 날짜 만들기
     let TLD = [];
-    for (let i = 1; i < 7 - ThisLasyDay; i++) {
+    for (let i = 1; i < 7 - ThisLasyDay; ++i) {
       if (i === 0) {
         return TLD;
       }
@@ -44,25 +44,19 @@ const Main = () => {
   };
 
   useEffect(() => {
-    setTotalDate(changeDate(7));
-  }, []);
-
-  useEffect(() => {
     setTotalDate(changeDate(month));
   }, [month]);
 
   const [today, setToday] = useState(0);
 
-  const goToday = () => {
-    let TODAY = new Date().getDate();
-    let goMonth = new Date().getMonth() + 1;
-    setMonth(goMonth);
-    setToday(TODAY);
+  const selectToday = () => {
+    setMonth(MONTH);
+    setToday(DATE);
   };
 
   return (
     <div>
-      <Head year={year} month={month} setMonth={setMonth} goToday={goToday} />
+      <Head year={year} month={month} setYear={setYear} setMonth={setMonth} selectToday={selectToday} />
       <Body totalDate={totalDate} today={today} month={month} year={year} />
     </div>
   );
