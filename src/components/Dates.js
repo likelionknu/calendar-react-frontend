@@ -85,12 +85,12 @@ const Form = styled.li`
 
 const DateNum = styled.div`
   padding: 1vw 0.9vw 0 0;
-  ${(props) => props.idx < props.lastDate && `color: #969696;`};
+  ${(props) => props.idx < props.lastDate && `color: #ffffff;`};
   ${(props) =>
     props.firstDate > 0 &&
     props.idx > props.firstDate - 1 &&
     `
-    color: #969696;
+    color: #ffffff;
   `};
 `;
 
