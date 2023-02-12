@@ -19,7 +19,7 @@ const Head = (props) => {
         </Year>
         <BtnBox>
           <Btn onClick={() => turnOverCalendar(-1)}>&lt;</Btn>
-          <Btn width="3vw" onClick={() => goToday()}>
+          <Btn width="3vw" onClick={() => selectToday()}>
             오늘
           </Btn>
           <Btn onClick={() => turnOverCalendar(1)}>&gt;</Btn>
