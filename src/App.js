@@ -60,7 +60,7 @@ const Main = () => {
       <Head year={year} month={month} setYear={setYear} setMonth={setMonth} selectToday={selectToday} />
       <Body totalDate={totalDate} today={today} month={month} year={year} />
       <div className='menu'>
-        <button onClick = {()=>setAddModalOpen(true)}>add</button>
+        <button className='addBtn' onClick = {()=>setAddModalOpen(true)}>add</button>
         {addModalOpen && (
           <AddModal
             todos={totalDate}

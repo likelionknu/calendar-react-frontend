@@ -36,3 +36,23 @@
     transform: rotate(360deg);
   }
 }
+
+.addBtn {
+  position:fixed;
+  right:3%;
+  bottom:7%;
+  width: 100px;
+  border:none;
+  border-radius: 25px;
+  background: white;
+  box-shadow: 2px 4px rgba(0,0,0,0.16);
+  color:#112667;
+  text-align: center;
+  align-items : center;
+  font-size: 1.5em;
+  transition: 0.5s;
+}
+.addBtn:hover{
+  color:white;
+  background: #112667;
+}
