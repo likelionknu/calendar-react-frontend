@@ -1,3 +1,12 @@
+# 캘린더를 만들어 볼려고 합니다.
+
+
+## 사용된 라이브러리
++ styled-components
+### `yarn add styled-components`
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
