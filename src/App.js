@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Head from './components/Head';
 import Body from './components/Body';
 import AddModal from './components/AddModal';
+import "./App.css";
 
 const Main = () => {
   const TODAY = new Date();
