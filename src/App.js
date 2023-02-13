@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Head from './components/Head';
 import Body from './components/Body';
+import AddModal from './components/AddModal';
 
 const Main = () => {
   const TODAY = new Date();
@@ -53,11 +54,21 @@ const Main = () => {
     setMonth(MONTH);
     setToday(DATE);
   };
-
+  const [addModalOpen, setAddModalOpen] = useState(false);
   return (
     <div>
       <Head year={year} month={month} setYear={setYear} setMonth={setMonth} selectToday={selectToday} />
       <Body totalDate={totalDate} today={today} month={month} year={year} />
+      <div className='menu'>
+        <button onClick = {()=>setAddModalOpen(true)}>add</button>
+        {addModalOpen && (
+          <AddModal
+            todos={totalDate}
+            setTodos={setTotalDate}
+            setModalOpen={setAddModalOpen}
+          />
+        )}
+      </div>
     </div>
   );
 };
