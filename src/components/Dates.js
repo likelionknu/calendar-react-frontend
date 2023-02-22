@@ -8,6 +8,7 @@ const Dates = (props) => {
   const [userInput, setUserInput] = useState({});
   const [evtList, setEvtList] = useState([]);
   const [openModal, setOpenModal] = useState(false);
+
   let dateKey = `${month}` + `${elm}`;
   const registEvent = (value) => {
     setEvtList([...evtList, value]);
@@ -34,12 +35,10 @@ const Dates = (props) => {
           <Holidays>
             {holiday !== undefined &&
               holiday.map((evt, index) => {
-                let key =
-                  elm.length < 2
-                    ? `${year}` + `${month}` + `${elm}`
-                    : `${year}` + `${month}` + '0' + `${elm}`;
                 return (
-                  Number(key) === evt.locdate && (
+                  Number(
+                    `${year}${month}${elm.length < 2 ? '' : '0'}${elm}`,
+                  ) === evt.locdate && (
                     <Holiday key={index}>{evt.dateName}</Holiday>
                   )
                 );
