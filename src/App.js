@@ -13,45 +13,28 @@ const Main = () => {
   const [selectYear, setSelectYear] = useState(TODAY_YEAR);
 
   const [totalDate, setTotalDate] = useState([]);
-  const checkNextMonth = (nextMonth) => {
-    return nextMonth === 0 ? 12 : nextMonth === 13 ? 1 : nextMonth;
-  };
   const changeDate = (month) => {
-    //이전 날짜
-    /*
-    변수명은 다른사람이 한눈에 알아 볼 수 있게 정확히 무엇을 의미하는지 자세히 작성 부탁드립니다.
-    const PVLastDate = new Date(TODAY_YEAR, month - 1, 0).getDate();
-    */
     const prevMonthLastDate = new Date(selectYear, month - 1, 0).getDate();
-    const prevMonthLastDay = new Date(selectYear, month - 1, 0).getDay(); // return day num (sun ~ sat : 0 ~ 6)
-    //다음 날짜
-    const ThisLasyDay = new Date(selectYear, month, 0).getDay();
-    const ThisLasyDate = new Date(selectYear, month, 0).getDate();
+    const prevMonthLastDay = new Date(selectYear, month - 1, 0).getDay();
+    const selectMonthLastDate = new Date(selectYear, month, 0).getDate();
+    const selectMonthLastDay = new Date(selectYear, month, 0).getDay();
 
-    //이전 날짜 만들기
-    let PVLD = [];
-    console.log(selectYear);
+    let prevMonthLastDates = [];
     if (prevMonthLastDay !== 6) {
-      console.log(selectMonth);
-      for (let i = 0; i < prevMonthLastDay + 1; ++i) {
-        PVLD.unshift(prevMonthLastDate - i);
-      }
-    }
-    //다음 날짜 만들기
-    let TLD = [];
-    for (let i = 1; i < 7 - ThisLasyDay; ++i) {
-      if (i === 0) {
-        return TLD;
-      }
-      TLD.push(i);
+      // 토요일이 아닌 경우에만
+      for (let i = 0; i <= prevMonthLastDay; ++i)
+        prevMonthLastDates.unshift(prevMonthLastDate - i);
     }
 
-    //현재날짜
-    let TD = [];
+    let nextMonthFirstDates = [];
+    for (let i = 1; i < 7 - selectMonthLastDay; ++i) {
+      nextMonthFirstDates.push(i);
+    }
 
-    TD = [...Array(ThisLasyDate + 1).keys()].slice(1);
-
-    return PVLD.concat(TD, TLD);
+    let selectMonthDates = [];
+    selectMonthDates = [...Array(selectMonthLastDate + 1).keys()];
+    selectMonthDates.shift();
+    return prevMonthLastDates.concat(selectMonthDates, nextMonthFirstDates);
   };
 
   useEffect(() => {
