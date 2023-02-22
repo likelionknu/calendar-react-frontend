@@ -1,31 +1,40 @@
-import React, { useState, useEffect } from 'react';
-import Head from './components/Head';
-import Body from './components/Body';
-import AddModal from './components/AddModal';
+import React, { useState, useEffect } from "react";
+import Head from "./components/Head";
+import Body from "./components/Body";
+import AddModal from "./components/AddModal";
 import "./App.css";
 
 const Main = () => {
   const TODAY = new Date();
-  const YEAR = TODAY.getFullYear();
-  const MONTH = TODAY.getMonth() + 1;
-  const DATE = TODAY.getDate();
-  const [month, setMonth] = useState(MONTH);
-  const [year, setYear] = useState(YEAR);
-  const [totalDate, setTotalDate] = useState([]);
+  const TODAY_YEAR = TODAY.getFullYear();
+  const TODAY_MONTH = TODAY.getMonth() + 1;
+  const TODAY_DATE = TODAY.getDate();
+  const [selectMonth, setSelectMonth] = useState(TODAY_MONTH);
+  const [selectYear, setSelectYear] = useState(TODAY_YEAR);
 
+  const [totalDate, setTotalDate] = useState([]);
+  const checkNextMonth = (nextMonth) => {
+    return nextMonth === 0 ? 12 : nextMonth === 13 ? 1 : nextMonth;
+  };
   const changeDate = (month) => {
     //이전 날짜
-    const PVLastDate = new Date(YEAR, month - 1, 0).getDate();
-    const PVLastDay = new Date(YEAR, month - 1, 0).getDay();
+    /*
+    변수명은 다른사람이 한눈에 알아 볼 수 있게 정확히 무엇을 의미하는지 자세히 작성 부탁드립니다.
+    const PVLastDate = new Date(TODAY_YEAR, month - 1, 0).getDate();
+    */
+    const prevMonthLastDate = new Date(selectYear, month - 1, 0).getDate();
+    const prevMonthLastDay = new Date(selectYear, month - 1, 0).getDay(); // return day num (sun ~ sat : 0 ~ 6)
     //다음 날짜
-    const ThisLasyDay = new Date(YEAR, month, 0).getDay();
-    const ThisLasyDate = new Date(YEAR, month, 0).getDate();
+    const ThisLasyDay = new Date(selectYear, month, 0).getDay();
+    const ThisLasyDate = new Date(selectYear, month, 0).getDate();
 
     //이전 날짜 만들기
     let PVLD = [];
-    if (PVLastDay !== 6) {
-      for (let i = 0; i < PVLastDay + 1; ++i) {
-        PVLD.unshift(PVLastDate - i);
+    console.log(selectYear);
+    if (prevMonthLastDay !== 6) {
+      console.log(selectMonth);
+      for (let i = 0; i < prevMonthLastDay + 1; ++i) {
+        PVLD.unshift(prevMonthLastDate - i);
       }
     }
     //다음 날짜 만들기
@@ -46,22 +55,35 @@ const Main = () => {
   };
 
   useEffect(() => {
-    setTotalDate(changeDate(month));
-  }, [month]);
+    setTotalDate(changeDate(selectMonth));
+  }, [selectMonth]);
 
   const [today, setToday] = useState(0);
 
   const selectToday = () => {
-    setMonth(MONTH);
-    setToday(DATE);
+    setSelectMonth(TODAY_MONTH);
+    setToday(TODAY_DATE);
   };
   const [addModalOpen, setAddModalOpen] = useState(false);
   return (
     <div>
-      <Head year={year} month={month} setYear={setYear} setMonth={setMonth} selectToday={selectToday} />
-      <Body totalDate={totalDate} today={today} month={month} year={year} />
-      <div className='menu'>
-        <button className='addBtn' onClick = {()=>setAddModalOpen(true)}>add</button>
+      <Head
+        year={selectYear}
+        month={selectMonth}
+        setYear={setSelectYear}
+        setMonth={setSelectMonth}
+        selectToday={selectToday}
+      />
+      <Body
+        totalDate={totalDate}
+        today={today}
+        month={selectMonth}
+        year={selectYear}
+      />
+      <div className="menu">
+        <button className="addBtn" onClick={() => setAddModalOpen(true)}>
+          add
+        </button>
         {addModalOpen && (
           <AddModal
             todos={totalDate}
