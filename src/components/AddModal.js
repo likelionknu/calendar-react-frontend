@@ -1,9 +1,9 @@
-import { useCallback, useState } from "react";
-import styled from "styled-components";
+import { useCallback, useState } from 'react';
+import styled from 'styled-components';
 
 const AddModal = ({ todos, setTodos, setModalOpen }) => {
-  const [title, setTitle] = useState("");
-  const [date, setDate] = useState("");
+  const [title, setTitle] = useState('');
+  const [date, setDate] = useState('');
   const closeModal = () => {
     setModalOpen(false);
   };
@@ -11,10 +11,11 @@ const AddModal = ({ todos, setTodos, setModalOpen }) => {
     setTitle(e.target.value);
   }, []);
   const inputDate = useCallback((e) => {
-    setDate(e.target.value);
+    setDate(new Date(e.target.value));
   }, []);
+
   const concatTodo = () => {
-    //setTodos((todos) => todos.concat({ title, date }));
+    setTodos(todos.concat({ title, date, dons: false }));
     closeModal();
   };
 
