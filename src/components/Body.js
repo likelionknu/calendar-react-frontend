@@ -4,7 +4,7 @@ import Dates from './Dates';
 import axios from 'axios';
 
 const Body = (props) => {
-  const { totalDate, today, month, year } = props;
+  const { totalDate, today, month, year, todos } = props;
   const lastDate = totalDate.indexOf(1);
   const firstDate = totalDate.indexOf(1, 7);
 
@@ -17,7 +17,7 @@ const Body = (props) => {
     try {
       const res = await axios.get(
         `http://localhost:8000/?solYear=${year}&solMonth=${month}`,
-        requestOptions
+        requestOptions,
       );
       console.log(res.data);
       setHoliday(res.data);
@@ -53,6 +53,7 @@ const Body = (props) => {
             month={month}
             year={year}
             holiday={holiday.item}
+            todos={todos}
           ></Dates>
         );
       })}

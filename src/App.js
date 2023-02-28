@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
-import Head from "./components/Head";
-import Body from "./components/Body";
-import AddModal from "./components/AddModal";
-import "./App.css";
+import React, { useState, useEffect } from 'react';
+import Head from './components/Head';
+import Body from './components/Body';
+import AddModal from './components/AddModal';
+import './App.css';
 
 const Main = () => {
   const TODAY = new Date();
@@ -47,7 +47,9 @@ const Main = () => {
     setSelectMonth(TODAY_MONTH);
     setToday(TODAY_DATE);
   };
+  const [todos, setTodos] = useState([]);
   const [addModalOpen, setAddModalOpen] = useState(false);
+
   return (
     <div>
       <Head
@@ -62,6 +64,7 @@ const Main = () => {
         today={today}
         month={selectMonth}
         year={selectYear}
+        todos={todos}
       />
       <div className="menu">
         <button className="addBtn" onClick={() => setAddModalOpen(true)}>
@@ -69,12 +72,20 @@ const Main = () => {
         </button>
         {addModalOpen && (
           <AddModal
-            todos={totalDate}
-            setTodos={setTotalDate}
+            todos={todos}
+            setTodos={setTodos}
             setModalOpen={setAddModalOpen}
           />
         )}
       </div>
+      추가한 일정
+      {todos.map((todo) => {
+        return (
+          <>
+            [{todo.title} {todo.date.getDate()}],
+          </>
+        );
+      })}
     </div>
   );
 };

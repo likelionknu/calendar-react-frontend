@@ -2,8 +2,17 @@ import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 const Dates = (props) => {
-  const { lastDate, firstDate, elm, findToday, month, year, idx, holiday } =
-    props;
+  const {
+    lastDate,
+    firstDate,
+    elm,
+    findToday,
+    month,
+    year,
+    idx,
+    holiday,
+    todos,
+  } = props;
 
   const [userInput, setUserInput] = useState({});
   const [evtList, setEvtList] = useState([]);
@@ -31,6 +40,18 @@ const Dates = (props) => {
         >
           <TodayCSS findToday={findToday}>{elm}</TodayCSS>일
         </DateNum>
+        <div className="todoList">
+          {todos
+            .filter(
+              (todo) =>
+                todo.date.getFullYear() === year &&
+                todo.date.getMonth() + 1 === month &&
+                todo.date.getDate() === elm,
+            )
+            .map((todo) => {
+              return <div>{todo.title}</div>;
+            })}
+        </div>
         {holiday !== undefined && (
           <Holidays>
             {holiday !== undefined &&
