@@ -38,21 +38,41 @@
 }
 
 .addBtn {
-  position:fixed;
-  right:3%;
-  bottom:7%;
+  position: fixed;
+  right: 3%;
+  bottom: 7%;
   width: 100px;
-  border:none;
+  border: none;
   border-radius: 25px;
   background: white;
-  box-shadow: 2px 4px rgba(0,0,0,0.16);
-  color:#112667;
+  box-shadow: 2px 4px rgba(0, 0, 0, 0.16);
+  color: #112667;
   text-align: center;
-  align-items : center;
+  align-items: center;
   font-size: 1.5em;
   transition: 0.5s;
 }
-.addBtn:hover{
-  color:white;
+.addBtn:hover {
+  color: white;
+  background: #112667;
+}
+
+.toggleViewBtn {
+  position: fixed;
+  right: 3%;
+  bottom: 13%;
+  width: 100px;
+  border: none;
+  border-radius: 25px;
+  background: white;
+  box-shadow: 2px 4px rgba(0, 0, 0, 0.16);
+  color: #112667;
+  text-align: center;
+  align-items: center;
+  font-size: 1.5em;
+  transition: 0.5s;
+}
+.toggleViewBtn:hover {
+  color: white;
   background: #112667;
 }
