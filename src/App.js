@@ -3,6 +3,7 @@ import Head from './components/Head';
 import Body from './components/Body';
 import AddModal from './components/AddModal';
 import './App.css';
+import styled from 'styled-components';
 
 const Main = () => {
   const TODAY = new Date();
@@ -49,6 +50,7 @@ const Main = () => {
   };
   const [todos, setTodos] = useState([]);
   const [addModalOpen, setAddModalOpen] = useState(false);
+
 
   return (
     <div>

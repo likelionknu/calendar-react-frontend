@@ -1,18 +1,16 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import Dates from './Dates';
-import axios from 'axios';
 
 const Body = (props) => {
   const { totalDate, today, month, year, todos } = props;
   const lastDate = totalDate.indexOf(1);
   const firstDate = totalDate.indexOf(1, 7);
 
-  const [holiday, setHoliday] = useState([0]);
-
   //today
   const findToday = totalDate.indexOf(today);
   const getMonth = new Date().getMonth() + 1;
+  /*
   const runAxios = async () => {
     try {
       const res = await axios.get(
@@ -20,7 +18,6 @@ const Body = (props) => {
         requestOptions,
       );
       console.log(res.data);
-      setHoliday(res.data);
     } catch (e) {
       console.log(e);
     }
@@ -39,11 +36,13 @@ const Body = (props) => {
   useEffect(() => {
     runAxios();
   }, [month]);
+*/
   return (
     <Form>
-      {totalDate.map((elm, idx) => {
+      {totalDate.map((elm, idx) =>  {
         return (
-          <Dates
+
+            <Dates
             key={idx}
             idx={idx}
             lastDate={lastDate}
@@ -52,7 +51,6 @@ const Body = (props) => {
             findToday={findToday === idx && month === getMonth && findToday}
             month={month}
             year={year}
-            holiday={holiday.item}
             todos={todos}
           ></Dates>
         );
