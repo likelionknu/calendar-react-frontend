@@ -14,35 +14,37 @@ const AddModal = ({ todos, setTodos, setModalOpen }) => {
     setDate(new Date(e.target.value));
   }, []);
 
-  const concatTodo = () => {
+  const concatTodo = (e) => {
+    e.preventDefault();
     setTodos(todos.concat({ title, date, dons: false }));
     closeModal();
   };
 
   return (
     <AddInterface>
-      <div className="modalTitle">새로운 일정</div>
-      <textarea
-        className="inputTitle"
-        type="textarea"
-        placeholder="추가할 일정"
-        onChange={inputTitle}
-      />
-      <input
-        className="inputDate"
-        type="datetime-local"
-        onChange={inputDate}
-      ></input>
-      <button className="hidden" onClick={concatTodo}>
-        등록
-      </button>
-      <button className="hidden" onClick={closeModal}>
-        취소
-      </button>
+      <form onSubmit={concatTodo}>
+        <div className="modalTitle">새로운 일정</div>
+        <textarea
+          className="inputTitle"
+          type="textarea"
+          placeholder="추가할 일정"
+          onChange={inputTitle}
+          required
+        />
+        <input
+          className="inputDate"
+          type="datetime-local"
+          onChange={inputDate}
+          required
+        />
+        <button type="submit">등록</button>
+        <button onClick={closeModal}>취소</button>
+      </form>
     </AddInterface>
   );
 };
 
+/*-----------------[styled-component]-----------------*/
 const AddInterface = styled.div`
   width: 400px;
   height: 300px;
