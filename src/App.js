@@ -49,7 +49,11 @@ const Main = () => {
   };
   const [todos, setTodos] = useState([]);
   const [addModalOpen, setAddModalOpen] = useState(false);
+  const [isAllView, setIsAllView] = useState(true); // 일정 완료 여부 표시 버튼, 기능 미구현
 
+  const concatTodo = (todo) => {
+    setTodos(todos.concat(todo).sort((a, b) => a.date - b.date));
+  };
   return (
     <div>
       <Head
@@ -67,6 +71,12 @@ const Main = () => {
         todos={todos}
       />
       <div className="menu">
+        <button
+          className="toggleViewBtn"
+          onClick={() => setIsAllView(!isAllView)}
+        >
+          {isAllView ? 'Hidden' : 'All'}
+        </button>
         <button className="addBtn" onClick={() => setAddModalOpen(true)}>
           add
         </button>
@@ -75,15 +85,17 @@ const Main = () => {
             todos={todos}
             setTodos={setTodos}
             setModalOpen={setAddModalOpen}
+            concatTodo={concatTodo}
           />
         )}
       </div>
-      추가한 일정
+      <h1>추가한 일정</h1>
       {todos.map((todo) => {
         return (
-          <>
-            [{todo.title} {todo.date.getDate()}],
-          </>
+          <div>
+            [title : {todo.title}], [date.getDate() : {todo.date.getDate()}],
+            [date.getHours() : {todo.date.getHours()}]
+          </div>
         );
       })}
     </div>

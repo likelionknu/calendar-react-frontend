@@ -1,7 +1,7 @@
 import { useCallback, useState } from 'react';
 import styled from 'styled-components';
 
-const AddModal = ({ todos, setTodos, setModalOpen }) => {
+const AddModal = ({ todos, setTodos, setModalOpen, concatTodo }) => {
   const [title, setTitle] = useState('');
   const [date, setDate] = useState('');
   const closeModal = () => {
@@ -14,15 +14,14 @@ const AddModal = ({ todos, setTodos, setModalOpen }) => {
     setDate(new Date(e.target.value));
   }, []);
 
-  const concatTodo = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    setTodos(todos.concat({ title, date, dons: false }));
+    concatTodo({ title, date, done: false });
     closeModal();
   };
-
   return (
     <AddInterface>
-      <form onSubmit={concatTodo}>
+      <form onSubmit={handleSubmit}>
         <div className="modalTitle">새로운 일정</div>
         <textarea
           className="inputTitle"
