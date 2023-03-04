@@ -1,7 +1,7 @@
 import { useCallback, useState } from 'react';
 import styled from 'styled-components';
 
-const AddModal = ({ todos, setTodos, setModalOpen, concatTodo }) => {
+const AddModal = ({ todos, setTodos, setModalOpen, concatTodo, nextId }) => {
   const [title, setTitle] = useState('');
   const [date, setDate] = useState('');
   const closeModal = () => {
@@ -16,7 +16,7 @@ const AddModal = ({ todos, setTodos, setModalOpen, concatTodo }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    concatTodo({ title, date, done: false });
+    concatTodo({ id: nextId, title, date, done: false });
     closeModal();
   };
   return (
