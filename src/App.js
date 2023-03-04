@@ -51,8 +51,10 @@ const Main = () => {
   const [addModalOpen, setAddModalOpen] = useState(false);
   const [isAllView, setIsAllView] = useState(true); // 일정 완료 여부 표시 버튼, 기능 미구현
 
+  const [nextId, setNextId] = useState(0);
   const concatTodo = (todo) => {
-    setTodos(todos.concat(todo).sort((a, b) => a.date - b.date));
+    setNextId(nextId + 1);
+    setTodos(todos.concat(todo));
   };
   return (
     <div>
@@ -86,6 +88,7 @@ const Main = () => {
             setTodos={setTodos}
             setModalOpen={setAddModalOpen}
             concatTodo={concatTodo}
+            nextId={nextId}
           />
         )}
       </div>

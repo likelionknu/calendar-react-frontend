@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
+import Modal from '../components/Modal';
 
 const Dates = (props) => {
   const {
@@ -17,6 +18,7 @@ const Dates = (props) => {
   const [userInput, setUserInput] = useState({});
   const [evtList, setEvtList] = useState([]);
   const [openModal, setOpenModal] = useState(false);
+  const [choiceListId, setChoiceListId] = useState(0);
 
   let dateKey = `${month}` + `${elm}`;
   const registEvent = (value) => {
@@ -25,13 +27,13 @@ const Dates = (props) => {
     setOpenModal(false);
   };
 
+  const clickList = (id) => {
+    setChoiceListId(id);
+  };
+
   return (
     <>
-      <Form
-        onDoubleClick={() => {
-          setOpenModal(true);
-        }}
-      >
+      <Form>
         <DateNum
           idx={idx}
           lastDate={lastDate}
@@ -49,7 +51,18 @@ const Dates = (props) => {
                 todo.date.getDate() === elm,
             )
             .map((todo) => {
-              return <div>{todo.title}</div>;
+              return (
+                <div
+                  key={todo.id}
+                  onClick={() => {
+                    clickList(todo.id);
+                    setOpenModal(true);
+                    console.log(todos);
+                  }}
+                >
+                  {todo.title}
+                </div>
+              );
             })}
         </div>
         {holiday !== undefined && (
@@ -85,6 +98,34 @@ const Dates = (props) => {
           </Lists>
         )}
       </Form>
+      {openModal && (
+        <Modal
+          openModal={openModal}
+          setOpenModal={setOpenModal}
+          year={todos[choiceListId].date.getFullYear()}
+          month={
+            todos[choiceListId].date.getMonth() + 1 < 10
+              ? '0' + (todos[choiceListId].date.getMonth() + 1)
+              : todos[choiceListId].date.getMonth() + 1
+          }
+          date={
+            todos[choiceListId].date.getDate() < 10
+              ? '0' + todos[choiceListId].date.getDate()
+              : todos[choiceListId].date.getDate()
+          }
+          hours={
+            todos[choiceListId].date.getHours() < 10
+              ? '0' + todos[choiceListId].date.getHours()
+              : todos[choiceListId].date.getHours()
+          }
+          minutes={
+            todos[choiceListId].date.getMinutes() < 10
+              ? '0' + todos[choiceListId].date.getMinutes()
+              : todos[choiceListId].date.getMinutes()
+          }
+          title={todos[choiceListId].title}
+        />
+      )}
     </>
   );
 };
