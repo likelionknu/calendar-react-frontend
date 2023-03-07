@@ -4,7 +4,7 @@ import Dates from './Dates';
 import axios from 'axios';
 
 const Body = (props) => {
-  const { totalDate, today, month, year, todos } = props;
+  const { totalDate, today, month, year, todos, isAllView } = props;
   const lastDate = totalDate.indexOf(1);
   const firstDate = totalDate.indexOf(1, 7);
 
@@ -54,6 +54,7 @@ const Body = (props) => {
             year={year}
             holiday={holiday.item}
             todos={todos}
+            isAllView={isAllView}
           ></Dates>
         );
       })}

@@ -71,6 +71,7 @@ const Main = () => {
         month={selectMonth}
         year={selectYear}
         todos={todos}
+        isAllView={isAllView}
       />
       <div className="menu">
         <button

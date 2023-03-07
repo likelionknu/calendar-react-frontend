@@ -13,6 +13,7 @@ const Dates = (props) => {
     idx,
     holiday,
     todos,
+    isAllView,
   } = props;
 
   const [userInput, setUserInput] = useState({});
@@ -48,7 +49,8 @@ const Dates = (props) => {
               (todo) =>
                 todo.date.getFullYear() === year &&
                 todo.date.getMonth() + 1 === month &&
-                todo.date.getDate() === elm,
+                todo.date.getDate() === elm &&
+                todo.done === isAllView,
             )
             .map((todo) => {
               return (
