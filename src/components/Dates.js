@@ -39,7 +39,7 @@ const Dates = (props) => {
         >
           <TodayCSS findToday={findToday}>{elm}</TodayCSS>일
         </DateNum>
-        <div className="todoList">
+        <div className="todoList" style={{ textAlign: 'left', fontSize: '15px'}}>
           {todos
             .filter(
               (todo) =>
@@ -47,8 +47,8 @@ const Dates = (props) => {
                 todo.date.getMonth() + 1 === month &&
                 todo.date.getDate() === elm,
             )
-            .map((todo) => {
-              return <div className="todoStyle">{todo.title}</div>;
+            .slice(0,7).map((todo) => {
+              return <div>{todo.title}</div>;
             })}
         </div>
         {Boolean(evtList[0]) && (
@@ -73,6 +73,8 @@ const Dates = (props) => {
     </>
   );
 };
+
+
 
 const Form = styled.li`
   position: relative;
@@ -115,6 +117,7 @@ const Lists = styled.div`
   display: flex;
   flex-direction: column;
   text-align: left;
+  
 `;
 const List = styled.span`
   margin-top: 0.3vw;
