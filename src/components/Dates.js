@@ -11,7 +11,6 @@ const Dates = (props) => {
     month,
     year,
     idx,
-    holiday,
     todos,
     isAllView,
     changeDone,
@@ -47,7 +46,7 @@ const Dates = (props) => {
         >
           <TodayCSS findToday={findToday}>{elm}</TodayCSS>일
         </DateNum>
-        <div className="todoList">
+        <div className="todoList" style={{ textAlign: 'left', fontSize: '15px', color: 'black'}}>
           {todos
             .filter(
               (todo) =>
@@ -56,7 +55,7 @@ const Dates = (props) => {
                 todo.date.getDate() === elm &&
                 todo.done === isAllView,
             )
-            .map((todo) => {
+            .slice(0,5).map((todo) => {
               return (
                 <TodoComponent
                   key={todo.id}
@@ -72,20 +71,6 @@ const Dates = (props) => {
               );
             })}
         </div>
-        {holiday !== undefined && (
-          <Holidays>
-            {holiday !== undefined &&
-              holiday.map((evt, index) => {
-                return (
-                  Number(
-                    `${year}${month}${elm.length < 2 ? '' : '0'}${elm}`,
-                  ) === evt.locdate && (
-                    <Holiday key={index}>{evt.dateName}</Holiday>
-                  )
-                );
-              })}
-          </Holidays>
-        )}
         {Boolean(evtList[0]) && (
           <Lists>
             {evtList.map((list, index) => {
@@ -157,12 +142,12 @@ const Form = styled.li`
 
 const DateNum = styled.div`
   padding: 1vw 0.9vw 0 0;
-  ${(props) => props.idx < props.lastDate && `color: #ffffff;`};
+  ${(props) => props.idx < props.lastDate && `display : none;`};
   ${(props) =>
     props.firstDate > 0 &&
     props.idx > props.firstDate - 1 &&
     `
-    color: #ffffff;
+    display : none
   `};
 `;
 
@@ -188,19 +173,6 @@ const List = styled.span`
   margin-top: 0.3vw;
   padding-left: 0.5vw;
   background-color: #f7ced9;
-  border-radius: 5px;
-`;
-const Holidays = styled.div`
-  display: flex;
-  flex-direction: column;
-  text-align: left;
-`;
-const Holiday = styled.div`
-  margin-top: 0.3vw;
-  padding-left: 0.5vw;
-  color: red;
-  font-weight: 700;
-  background-color: skyblue;
   border-radius: 5px;
 `;
 const TodoComponent = styled.div`
