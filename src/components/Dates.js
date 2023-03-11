@@ -14,12 +14,16 @@ const Dates = (props) => {
     holiday,
     todos,
     isAllView,
+    changeDone,
+    deleteTodo,
   } = props;
 
   const [userInput, setUserInput] = useState({});
   const [evtList, setEvtList] = useState([]);
   const [openModal, setOpenModal] = useState(false);
   const [choiceListId, setChoiceListId] = useState(0);
+
+  useEffect(() => {}, [todos]);
 
   let dateKey = `${month}` + `${elm}`;
   const registEvent = (value) => {
@@ -54,8 +58,9 @@ const Dates = (props) => {
             )
             .map((todo) => {
               return (
-                <div
+                <TodoComponent
                   key={todo.id}
+                  done={todo.done}
                   onClick={() => {
                     clickList(todo.id);
                     setOpenModal(true);
@@ -63,7 +68,7 @@ const Dates = (props) => {
                   }}
                 >
                   {todo.title}
-                </div>
+                </TodoComponent>
               );
             })}
         </div>
@@ -126,6 +131,10 @@ const Dates = (props) => {
               : todos[choiceListId].date.getMinutes()
           }
           title={todos[choiceListId].title}
+          choiceListId={choiceListId}
+          changeDone={changeDone}
+          deleteTodo={deleteTodo}
+          todos={todos}
         />
       )}
     </>
@@ -194,5 +203,13 @@ const Holiday = styled.div`
   background-color: skyblue;
   border-radius: 5px;
 `;
-
+const TodoComponent = styled.div`
+  cursor: pointer;
+  ${(props) =>
+    props.done &&
+    `
+      color: #969696;
+      text-decoration: line-through;
+    `}
+`;
 export default Dates;

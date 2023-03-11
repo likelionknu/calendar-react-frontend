@@ -10,6 +10,10 @@ const modal = ({
   hours,
   minutes,
   title,
+  choiceListId,
+  changeDone,
+  deleteTodo,
+  todos,
 }) => {
   // 모달 끄기
   const closeModal = () => {
@@ -45,8 +49,12 @@ const modal = ({
         </p>
         <p className="todo">{title}</p>
         <p className="btn">
-          <p className="delete">삭제</p>
-          <p className="done">완료</p>
+          <p className="delete" onClick={() => deleteTodo(choiceListId)}>
+            삭제
+          </p>
+          <p className="done" onClick={() => changeDone(choiceListId)}>
+            {todos[choiceListId].done ? '미완료' : '완료'}
+          </p>
         </p>
       </div>
       <button className="close" onClick={closeModal}>

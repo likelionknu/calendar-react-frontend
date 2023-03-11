@@ -56,6 +56,31 @@ const Main = () => {
     setNextId(nextId + 1);
     setTodos(todos.concat(todo).sort((a, b) => a.date - b.date));
   };
+  // 완료버튼
+  const changeDone = (id) => {
+    const changeTodos = todos.map((todo) => {
+      if (todo.id === id) {
+        todo.done ? (todo.done = false) : (todo.done = true);
+      }
+      return todo;
+    });
+    setTodos(changeTodos);
+    console.log('isDone? : ', todos[id].done);
+  };
+  // 삭제버튼
+  const deleteTodo = (id) => {
+    const changeTodos = todos.filter((todo) => {
+      return todo.id !== id;
+    });
+    // todos.map((todo) => {
+    //   if (todo.id === id) {
+    //     todo.splice(id, 1);
+    //   }
+    //   return todo;
+    // });
+    setTodos(changeTodos);
+    console.log('todos: ', todos);
+  };
   return (
     <div>
       <Head
@@ -72,6 +97,8 @@ const Main = () => {
         year={selectYear}
         todos={todos}
         isAllView={isAllView}
+        changeDone={changeDone}
+        deleteTodo={deleteTodo}
       />
       <div className="menu">
         <button
@@ -94,7 +121,7 @@ const Main = () => {
         )}
       </div>
       <h1>추가한 일정</h1>
-      {todos.map((todo) => {
+      {todos.map((todo, index) => {
         return (
           <div>
             [title : {todo.title}], [date.getDate() : {todo.date.getDate()}],
