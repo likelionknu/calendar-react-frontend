@@ -54,7 +54,7 @@ const Main = () => {
   const [nextId, setNextId] = useState(0);
   const concatTodo = (todo) => {
     setNextId(nextId + 1);
-    setTodos(todos.concat(todo).sort((a, b) => a.date - b.date));
+    setTodos(todos.concat(todo));
   };
   // 완료버튼
   const changeDone = (id) => {
