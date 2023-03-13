@@ -46,16 +46,20 @@ const Dates = (props) => {
         >
           <TodayCSS findToday={findToday}>{elm}</TodayCSS>일
         </DateNum>
-        <div className="todoList" style={{ textAlign: 'left', fontSize: '15px', color: 'black'}}>
+        <div
+          className="todoList"
+          style={{ textAlign: 'left', fontSize: '15px', color: 'black' }}
+        >
           {todos
             .filter(
               (todo) =>
                 todo.date.getFullYear() === year &&
                 todo.date.getMonth() + 1 === month &&
                 todo.date.getDate() === elm &&
-                todo.done === isAllView,
+                (isAllView || (!isAllView && todo.done === true)),
             )
-            .slice(0,5).map((todo) => {
+            .slice(0, 5)
+            .map((todo) => {
               return (
                 <TodoComponent
                   key={todo.id}

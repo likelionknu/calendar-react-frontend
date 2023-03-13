@@ -120,15 +120,16 @@ const Main = () => {
           />
         )}
       </div>
-      <h1>추가한 일정</h1>
+      {/* <h1>추가한 일정</h1>
       {todos.map((todo, index) => {
         return (
           <div>
             [title : {todo.title}], [date.getDate() : {todo.date.getDate()}],
-            [date.getHours() : {todo.date.getHours()}]
+            [date.getHours() : {todo.date.getHours()}], [todo.done :
+            {todo.done.toString()}]
           </div>
         );
-      })}
+      })} */}
     </div>
   );
 };
