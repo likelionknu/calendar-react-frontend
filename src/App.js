@@ -72,12 +72,7 @@ const Main = () => {
     const changeTodos = todos.filter((todo) => {
       return todo.id !== id;
     });
-    // todos.map((todo) => {
-    //   if (todo.id === id) {
-    //     todo.splice(id, 1);
-    //   }
-    //   return todo;
-    // });
+
     setTodos(changeTodos);
     console.log('todos: ', todos);
   };

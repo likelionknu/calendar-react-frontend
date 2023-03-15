@@ -1,7 +1,7 @@
-import { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import styled from 'styled-components';
 
-const modal = ({
+const Modal = ({
   openModal,
   setOpenModal,
   year,
@@ -15,8 +15,14 @@ const modal = ({
   deleteTodo,
   todos,
 }) => {
+  const [isDelete, setIsDelete] = useState(false);
+
   // 모달 끄기
   const closeModal = () => {
+    if (isDelete) {
+      deleteTodo(choiceListId);
+      setIsDelete(false);
+    }
     setOpenModal(false);
   };
 
@@ -49,8 +55,11 @@ const modal = ({
         </p>
         <p className="todo">{title}</p>
         <p className="btn">
-          <p className="delete" onClick={() => deleteTodo(choiceListId)}>
-            삭제
+          <p
+            className="delete"
+            onClick={() => (isDelete ? setIsDelete(false) : setIsDelete(true))}
+          >
+            {isDelete ? '삭제 취소' : '삭제'}
           </p>
           <p className="done" onClick={() => changeDone(choiceListId)}>
             {todos[choiceListId].done ? '미완료' : '완료'}
@@ -171,4 +180,4 @@ const Container = styled.div`
   }
 `;
 
-export default modal;
+export default Modal;

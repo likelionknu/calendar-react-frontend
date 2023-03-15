@@ -22,7 +22,9 @@ const Dates = (props) => {
   const [openModal, setOpenModal] = useState(false);
   const [choiceListId, setChoiceListId] = useState(0);
 
-  useEffect(() => {}, [todos]);
+  useEffect(() => {
+    console.log(todos);
+  }, [todos]);
 
   let dateKey = `${month}` + `${elm}`;
   const registEvent = (value) => {
@@ -56,7 +58,7 @@ const Dates = (props) => {
                 todo.date.getFullYear() === year &&
                 todo.date.getMonth() + 1 === month &&
                 todo.date.getDate() === elm &&
-                (isAllView || (!isAllView && todo.done === true)),
+                (isAllView || (!isAllView && todo.done === false)),
             )
             .slice(0, 5)
             .map((todo) => {
