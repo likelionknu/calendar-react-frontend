@@ -72,12 +72,7 @@ const Main = () => {
     const changeTodos = todos.filter((todo) => {
       return todo.id !== id;
     });
-    // todos.map((todo) => {
-    //   if (todo.id === id) {
-    //     todo.splice(id, 1);
-    //   }
-    //   return todo;
-    // });
+
     setTodos(changeTodos);
     console.log('todos: ', todos);
   };
@@ -120,15 +115,16 @@ const Main = () => {
           />
         )}
       </div>
-      <h1>추가한 일정</h1>
+      {/* <h1>추가한 일정</h1>
       {todos.map((todo, index) => {
         return (
           <div>
             [title : {todo.title}], [date.getDate() : {todo.date.getDate()}],
-            [date.getHours() : {todo.date.getHours()}]
+            [date.getHours() : {todo.date.getHours()}], [todo.done :
+            {todo.done.toString()}]
           </div>
         );
-      })}
+      })} */}
     </div>
   );
 };
