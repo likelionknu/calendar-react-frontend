@@ -32,8 +32,11 @@ const Dates = (props) => {
   };
 
   const clickList = (id) => {
-    setChoiceListId(id);
+    setChoiceListId(todos.findIndex((todo) => todo.id === id));
   };
+  useEffect(() => {
+    console.log(choiceListId);
+  }, [choiceListId]);
 
   return (
     <>
@@ -46,7 +49,10 @@ const Dates = (props) => {
         >
           <TodayCSS findToday={findToday}>{elm}</TodayCSS>일
         </DateNum>
-        <div className="todoList" style={{ textAlign: 'left', fontSize: '15px', color: 'black'}}>
+        <div
+          className="todoList"
+          style={{ textAlign: 'left', fontSize: '15px', color: 'black' }}
+        >
           {todos
             .filter(
               (todo) =>
@@ -55,7 +61,8 @@ const Dates = (props) => {
                 todo.date.getDate() === elm &&
                 todo.done === isAllView,
             )
-            .slice(0,5).map((todo) => {
+            .slice(0, 5)
+            .map((todo) => {
               return (
                 <TodoComponent
                   key={todo.id}
@@ -64,6 +71,7 @@ const Dates = (props) => {
                     clickList(todo.id);
                     setOpenModal(true);
                     console.log(todos);
+                    console.log(choiceListId);
                   }}
                 >
                   {todo.title}
