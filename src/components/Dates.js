@@ -34,8 +34,11 @@ const Dates = (props) => {
   };
 
   const clickList = (id) => {
-    setChoiceListId(id);
+    setChoiceListId(todos.findIndex((todo) => todo.id === id));
   };
+  useEffect(() => {
+    console.log(choiceListId);
+  }, [choiceListId]);
 
   return (
     <>
@@ -70,6 +73,7 @@ const Dates = (props) => {
                     clickList(todo.id);
                     setOpenModal(true);
                     console.log(todos);
+                    console.log(choiceListId);
                   }}
                 >
                   {todo.title}

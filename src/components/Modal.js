@@ -92,7 +92,6 @@ const Container = styled.div`
   border: 1px solid black;
   border-radius: 8px;
   background-color: white;
-
   .title {
     display: flex;
     justify-content: center;
