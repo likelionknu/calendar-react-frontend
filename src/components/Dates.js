@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-expressions */
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import Modal from '../components/Modal';
@@ -34,7 +35,7 @@ const Dates = (props) => {
   };
 
   const clickList = (id) => {
-    setChoiceListId(todos.findIndex((todo) => todo.id === id));
+    setChoiceListId(id);
   };
   useEffect(() => {
     console.log(choiceListId);
@@ -104,28 +105,38 @@ const Dates = (props) => {
         <Modal
           openModal={openModal}
           setOpenModal={setOpenModal}
-          year={todos[choiceListId].date.getFullYear()}
-          month={
-            todos[choiceListId].date.getMonth() + 1 < 10
-              ? '0' + (todos[choiceListId].date.getMonth() + 1)
-              : todos[choiceListId].date.getMonth() + 1
-          }
-          date={
-            todos[choiceListId].date.getDate() < 10
-              ? '0' + todos[choiceListId].date.getDate()
-              : todos[choiceListId].date.getDate()
-          }
-          hours={
-            todos[choiceListId].date.getHours() < 10
-              ? '0' + todos[choiceListId].date.getHours()
-              : todos[choiceListId].date.getHours()
-          }
-          minutes={
-            todos[choiceListId].date.getMinutes() < 10
-              ? '0' + todos[choiceListId].date.getMinutes()
-              : todos[choiceListId].date.getMinutes()
-          }
-          title={todos[choiceListId].title}
+          year={todos.map(
+            (todo) => todo.id === choiceListId && todo.date.getFullYear(),
+          )}
+          month={todos.map(
+            (todo) =>
+              todo.id === choiceListId &&
+              (todo.date.getMonth() + 1 < 10
+                ? '0' + (todo.date.getMonth() + 1)
+                : todo.date.getMonth() + 1),
+          )}
+          date={todos.map(
+            (todo) =>
+              todo.id === choiceListId &&
+              (todo.date.getDate() < 10
+                ? '0' + todo.date.getDate()
+                : todo.date.getDate()),
+          )}
+          hours={todos.map(
+            (todo) =>
+              todo.id === choiceListId &&
+              (todo.date.getHours() < 10
+                ? '0' + todo.date.getHours()
+                : todo.date.getHours()),
+          )}
+          minutes={todos.map(
+            (todo) =>
+              todo.id === choiceListId &&
+              (todo.date.getMinutes() < 10
+                ? '0' + todo.date.getMinutes()
+                : todo.date.getMinutes()),
+          )}
+          title={todos.map((todo) => todo.id === choiceListId && todo.title)}
           choiceListId={choiceListId}
           changeDone={changeDone}
           deleteTodo={deleteTodo}
