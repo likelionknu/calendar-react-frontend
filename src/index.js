@@ -10,5 +10,5 @@ ReactDOM.render(
     <GlobalStyle />
     <Main />
   </ThemeProvider>,
-  document.getElementById('root')
+  document.getElementById('root'),
 );

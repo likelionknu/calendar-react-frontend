@@ -1,7 +1,7 @@
 import { useCallback, useState } from 'react';
 import styled from 'styled-components';
 
-const AddModal = ({ todos, setTodos, setModalOpen, concatTodo, nextId }) => {
+const AddModal = ({ setModalOpen, concatTodo, nextId }) => {
   const [title, setTitle] = useState('');
   const [date, setDate] = useState('');
   const closeModal = () => {
