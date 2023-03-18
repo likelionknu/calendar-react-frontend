@@ -16,20 +16,9 @@ const Dates = (props) => {
     changeDone,
     deleteTodo,
   } = props;
-
-  // const [userInput, setUserInput] = useState({});
-  // const [evtList, setEvtList] = useState([]);
+  const isTodo = props.todo;
   const [openModal, setOpenModal] = useState(false);
   const [choiceListId, setChoiceListId] = useState(0);
-
-  // useEffect(() => {}, [todos]);
-
-  // let dateKey = `${month}` + `${elm}`;
-  // const registEvent = (value) => {
-  //   setEvtList([...evtList, value]);
-  //   setUserInput('');
-  //   setOpenModal(false);
-  // };
 
   const clickList = (id) => {
     setChoiceListId(id);
@@ -49,7 +38,12 @@ const Dates = (props) => {
         </DateNum>
         <div
           className="todoList"
-          style={{ textAlign: 'left', fontSize: '15px', color: 'black' }}
+          style={{
+            textAlign: 'left',
+            fontSize: '15px',
+            color: 'black',
+            backgroundColor: '#FFFFCC',
+          }}
         >
           {todos
             .filter(
@@ -61,40 +55,21 @@ const Dates = (props) => {
             )
             .slice(0, 5)
             .map((todo) => {
-              return (
-                <TodoComponent
-                  key={todo.id}
-                  done={todo.done}
-                  onClick={() => {
-                    clickList(todo.id);
-                    setOpenModal(true);
-                    // console.log(todos);
-                    // console.log('choiceListId', choiceListId);
-                  }}
-                >
-                  {todo.title}
-                </TodoComponent>
-              );
-            })}
-        </div>
-        {/* {Boolean(evtList[0]) && (
-          <Lists>
-            {evtList.map((list, index) => {
-              return (
-                list.slice(0, list.indexOf('_')) === dateKey && (
-                  <List
-                    key={index}
+              if (lastDate <= idx && firstDate > idx)
+                return (
+                  <TodoComponent
+                    key={todo.id}
+                    done={todo.done}
                     onClick={() => {
+                      clickList(todo.id);
                       setOpenModal(true);
                     }}
                   >
-                    {list.slice(list.indexOf('_') + 1, list.length)}
-                  </List>
-                )
-              );
+                    {todo.title}
+                  </TodoComponent>
+                );
             })}
-          </Lists>
-        )} */}
+        </div>
       </Form>
       {openModal && (
         <Modal
@@ -170,17 +145,6 @@ const TodayCSS = styled.span`
  `}
 `;
 
-const Lists = styled.div`
-  display: flex;
-  flex-direction: column;
-  text-align: left;
-`;
-const List = styled.span`
-  margin-top: 0.3vw;
-  padding-left: 0.5vw;
-  background-color: #f7ced9;
-  border-radius: 5px;
-`;
 const TodoComponent = styled.div`
   cursor: pointer;
   ${(props) =>
