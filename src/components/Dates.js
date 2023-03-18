@@ -23,10 +23,6 @@ const Dates = (props) => {
   const [openModal, setOpenModal] = useState(false);
   const [choiceListId, setChoiceListId] = useState(0);
 
-  useEffect(() => {
-    console.log(todos);
-  }, [todos]);
-
   let dateKey = `${month}` + `${elm}`;
   const registEvent = (value) => {
     setEvtList([...evtList, value]);
@@ -37,9 +33,7 @@ const Dates = (props) => {
   const clickList = (id) => {
     setChoiceListId(id);
   };
-  useEffect(() => {
-    console.log(choiceListId);
-  }, [choiceListId]);
+  useEffect(() => {}, [choiceListId]);
 
   return (
     <>
@@ -74,7 +68,7 @@ const Dates = (props) => {
                     clickList(todo.id);
                     setOpenModal(true);
                     console.log(todos);
-                    console.log(choiceListId);
+                    console.log('choiceListId', choiceListId);
                   }}
                 >
                   {todo.title}

@@ -16,6 +16,7 @@ const Modal = ({
   todos,
 }) => {
   const [isDelete, setIsDelete] = useState(false);
+  const [isDone, setIsDone] = useState('');
 
   // 모달 끄기
   const closeModal = () => {
@@ -43,6 +44,14 @@ const Modal = ({
     }
   };
 
+  useEffect(() => {
+    todos.map((todo) => {
+      if (todo.id === choiceListId) {
+        todo.done ? setIsDone('미완료') : setIsDone('완료');
+      }
+    });
+  }, [todos]);
+
   return (
     <Container ref={wrapperRef} value={openModal}>
       <div className="list">
@@ -54,7 +63,7 @@ const Modal = ({
           {hours}:{minutes}
         </p>
         <p className="todo">{title}</p>
-        <p className="btn">
+        <div className="btn">
           <p
             className="delete"
             onClick={() => (isDelete ? setIsDelete(false) : setIsDelete(true))}
@@ -62,9 +71,9 @@ const Modal = ({
             {isDelete ? '삭제 취소' : '삭제'}
           </p>
           <p className="done" onClick={() => changeDone(choiceListId)}>
-            {todos[choiceListId].done ? '미완료' : '완료'}
+            {isDone}
           </p>
-        </p>
+        </div>
       </div>
       <button className="close" onClick={closeModal}>
         Confirm

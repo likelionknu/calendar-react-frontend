@@ -65,7 +65,6 @@ const Main = () => {
       return todo;
     });
     setTodos(changeTodos);
-    console.log('isDone? : ', todos[id].done);
   };
   // 삭제버튼
   const deleteTodo = (id) => {
@@ -74,7 +73,6 @@ const Main = () => {
     });
 
     setTodos(changeTodos);
-    console.log('todos: ', todos);
   };
   return (
     <div>
